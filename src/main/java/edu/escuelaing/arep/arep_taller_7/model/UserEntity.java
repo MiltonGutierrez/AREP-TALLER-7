@@ -2,8 +2,15 @@ package edu.escuelaing.arep.arep_taller_7.model;
 
 
 import edu.escuelaing.arep.arep_taller_7.dto.UserDto;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
 public class UserEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
     private String password;

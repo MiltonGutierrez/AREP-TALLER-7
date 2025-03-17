@@ -1,9 +1,9 @@
 package edu.escuelaing.arep.arep_taller_7.service;
 
 import edu.escuelaing.arep.arep_taller_7.dto.UserDto;
+import edu.escuelaing.arep.arep_taller_7.exception.UserException;
 import edu.escuelaing.arep.arep_taller_7.model.UserEntity;
 import edu.escuelaing.arep.arep_taller_7.repository.UserRepository;
-import edu.escuelaing.arep.exception.UserException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
