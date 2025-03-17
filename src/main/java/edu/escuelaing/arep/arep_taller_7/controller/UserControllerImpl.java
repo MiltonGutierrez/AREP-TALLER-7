@@ -6,13 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.escuelaing.arep.arep_taller_7.dto.UserDto;
+import edu.escuelaing.arep.arep_taller_7.exception.UserException;
 import edu.escuelaing.arep.arep_taller_7.model.UserEntity;
 import edu.escuelaing.arep.arep_taller_7.service.UserService;
-import edu.escuelaing.arep.exception.UserException;
 
 @RestController
 @CrossOrigin("*")
@@ -28,13 +34,15 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity<Object> createUserEntity(UserDto userDto) {
+    @PostMapping
+    public ResponseEntity<Object> createUserEntity(@RequestBody UserDto userDto) {
         UserEntity user = userService.createUser(userDto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<Object> getUserEntity(Long id) throws UserException {
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getUserEntity(@PathVariable Long id) throws UserException {
         try {
             UserEntity user = userService.getUserById(id);
             return new ResponseEntity<>(user, HttpStatus.OK);
@@ -44,12 +52,14 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
+    @GetMapping
     public ResponseEntity<Object> getAllUserEntity() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Object> updateEntity(Long id, UserDto userDto) throws UserException {
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateEntity(@PathVariable Long id, @RequestBody UserDto userDto) throws UserException {
         try {
             UserEntity user = userService.updateUser(id, userDto);
             return new ResponseEntity<>(user, HttpStatus.OK);
@@ -59,7 +69,8 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity<Object> deleteUserEntity(Long id) throws UserException {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteUserEntity(@PathVariable Long id) throws UserException {
         try {
             userService.deleteUser(id);
             return new ResponseEntity<>(HttpStatus.OK);

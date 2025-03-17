@@ -1,5 +1,5 @@
 
-package edu.escuelaing.arep.exception;
+package edu.escuelaing.arep.arep_taller_7.exception;
 
 public class UserException extends Exception {
 
