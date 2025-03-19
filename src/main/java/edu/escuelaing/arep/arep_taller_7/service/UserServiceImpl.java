@@ -6,6 +6,7 @@ import edu.escuelaing.arep.arep_taller_7.model.UserEntity;
 import edu.escuelaing.arep.arep_taller_7.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +36,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<UserEntity> getUserByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
     public UserEntity createUser(UserDto userDto) {
         UserEntity userEntity = new UserEntity(userDto);
         return userRepository.save(userEntity);
@@ -47,7 +53,7 @@ public class UserServiceImpl implements UserService {
             user.setUsername(userDto.getUsername());
         }
         if(userDto.getPassword() != null){
-            user.setPassword(userDto.getPassword());
+            user.setPassword(new BCryptPasswordEncoder().encode(userDto.getPassword()));
         }
         userRepository.save(user);
         return user;
