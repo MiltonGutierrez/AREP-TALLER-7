@@ -1,34 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Twitter</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="apiclient.js"></script>
-    <script src="twitter.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autenticación</title>
+    <link rel="stylesheet" href="css/auth.css" />
+  </head>
+  <body>
     <div class="navbar">
-        <h1>Mini Twitter</h1>
-    </div>
-    <div class="container">
-        <!-- Panel izquierdo para crear post -->
-        <div class="left-panel">
-            <h2>Crear Post</h2>
-            <textarea id="postContent" placeholder="Escribe tu post..." rows="5"></textarea>
-            <button id="submitPost" onclick="twitter.createPost()">Publicar</button>
-        </div>
-
-        <!-- Panel derecho para ver el hilo de posts -->
-        <div class="right-panel">
-            <h2>Hilo de Posts</h2>
-            <div id="postList" class="post-list">
-                <!-- Los posts aparecerán aquí -->
-            </div>
-        </div>
+      <h1>AREP Twitter</h1>
     </div>
 
-    
-</body>
+    <div class="auth-container">
+      <div class="tabs">
+        <button id="showLogin" class="active">Iniciar Sesión</button>
+        <button id="showRegister">Registrarse</button>
+      </div>
+
+      <div class="form-container">
+        <form id="loginForm" class="auth-form">
+          <input
+            type="text"
+            id="loginUsername"
+            placeholder="Nombre de Usuario"
+            required
+            autocomplete="off"
+          />
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Contraseña"
+            required
+            autocomplete="off"
+          />
+          <button type="submit">Iniciar Sesión</button>
+        </form>
+
+        <form id="registerForm" class="auth-form hidden">
+          <input
+            type="text"
+            id="regUsername"
+            placeholder="Nombre de Usuario"
+            required
+            autocomplete="off"
+          />
+          <input
+            type="password"
+            id="regPassword"
+            placeholder="Contraseña"
+            required
+            autocomplete="off"
+          />
+          <button type="submit">Registrarse</button>
+        </form>
+      </div>
+    </div>
+    <script src="js/apiclient.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
 </html>

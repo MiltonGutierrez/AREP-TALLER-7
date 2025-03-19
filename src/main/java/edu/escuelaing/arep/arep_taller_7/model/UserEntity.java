@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class UserEntity {
@@ -27,7 +28,7 @@ public class UserEntity {
     public UserEntity(UserDto userDto){
         this.id = null;
         this.username = userDto.getUsername();
-        this.password = userDto.getPassword();
+        this.password = new BCryptPasswordEncoder().encode(userDto.getPassword());
     }
 
     public Long getId() {
