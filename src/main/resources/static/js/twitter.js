@@ -4,7 +4,7 @@ const twitter = (() => {
 
     const createPost = async () => {
         let content = document.getElementById('postContent').value;
-        let username = "user";
+        let username = localStorage.getItem("username");
         let post = JSON.stringify({ content, username });
         try {
             let response = await api.createPost(post)
@@ -41,9 +41,16 @@ const twitter = (() => {
         return postItem;
     };
 
+    const updateCharacterCount = () => {
+        let textarea = document.getElementById('postContent');
+        let counter_characters = document.querySelector('.counter_characters');
+        counter_characters.innerText = textarea.value.length;
+    };
+
     return {
         createPost,
-        getPostList
+        getPostList,
+        updateCharacterCount
     }
 
 })();

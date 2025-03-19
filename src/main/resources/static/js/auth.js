@@ -25,12 +25,14 @@ loginForm.addEventListener("submit", function(event) {
 
 function authenticateUser(data) {
     const promise = apiClient.authUser(data);
+    localStorage.setItem("username", data.username );
     promise.then(response => {
         return response.json()
     })
     .then(data => {
         const { token } = data;
         localStorage.setItem("token", token );
+        
         alert("Inicio de sesión correcto.");
         window.location.href = "twitter.html";
     })

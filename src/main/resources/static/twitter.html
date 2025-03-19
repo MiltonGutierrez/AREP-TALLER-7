@@ -16,7 +16,8 @@
         <!-- Panel izquierdo para crear post -->
         <div class="left-panel">
             <h2>Crear Post</h2>
-            <textarea id="postContent" placeholder="Escribe tu post..." rows="5" autocomplete="off"></textarea>
+            <textarea id="postContent" placeholder="Escribe tu post..." rows="5" autocomplete="off" maxlength="140" oninput="twitter.updateCharacterCount()"></textarea>
+            <div class="counter"><p class="counter_characters">0</p><p>/140</p></div>
             <button id="submitPost" onclick="twitter.createPost()">Publicar</button>
         </div>
 
