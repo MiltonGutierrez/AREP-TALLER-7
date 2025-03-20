@@ -1,3 +1,7 @@
+### Escuela Colombiana de Ingeniería
+
+### Arquitectura Empresarial - AREP
+
 # Taller de Microservicios
 
 En este taller se diseñó y desarrolló una API junto con un monolito en Spring Boot que permite a los usuarios realizar publicaciones de hasta 140 caracteres, registrándolas en un flujo único de posts. La aplicación incluye entidades principales: Usuario y Post-Hilo (Stream).
