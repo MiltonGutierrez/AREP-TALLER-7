@@ -6,7 +6,6 @@ import java.util.Optional;
 import edu.escuelaing.arep.arep_taller_7.dto.PostDto;
 import edu.escuelaing.arep.arep_taller_7.exception.PostException;
 import edu.escuelaing.arep.arep_taller_7.model.PostEntity;
-import edu.escuelaing.arep.arep_taller_7.model.UserEntity;
 
 public interface PostService {
     

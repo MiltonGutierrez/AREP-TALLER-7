@@ -3,7 +3,6 @@ package edu.escuelaing.arep.arep_taller_7.service;
 import java.util.List;
 import java.util.Optional;
 
-import edu.escuelaing.arep.arep_taller_7.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
