@@ -206,7 +206,10 @@ El proyecto está diseñado siguiendo un sistema de capas que organiza la lógic
 
 ### Diagrama del proyecto
 
-## Video del AREP-Twitter
+![image](https://github.com/user-attachments/assets/042f60a4-5f8b-413f-84d4-09deaaf44022)
+
+
+## Video AREP-Twitter
 
 https://github.com/user-attachments/assets/1f8c063c-1bd6-4073-8d59-5d2ea9dc63a2
 
@@ -214,7 +217,7 @@ https://github.com/user-attachments/assets/1f8c063c-1bd6-4073-8d59-5d2ea9dc63a2
 
 ### PostTest
 
-Este archivo contiene pruebas unitarias para verificar el comportamiento de las capas de servicio (`PostServiceImpl`) y controlador (`PostControllerImpl`) de la aplicación. A continuación, se describen brevemente las pruebas realizadas:
+Este archivo contiene pruebas unitarias para verificar el comportamiento de las capas de servicio (`PostServiceImpl`) y (`UserServiceImpl`) de la aplicación. A continuación, se describen brevemente las pruebas realizadas:
 
 #### Pruebas para `PostServiceImpl`
 Estas pruebas verifican la lógica de negocio y la interacción con el repositorio (`PostRepository`).
@@ -227,19 +230,28 @@ Estas pruebas verifican la lógica de negocio y la interacción con el repositor
 6. **`shouldDeletePost`**: Verifica que un post existente se elimine correctamente.
 7. **`shouldGetAllPosts`**: Verifica que se obtengan todos los posts almacenados.
 
-#### Pruebas para `PostControllerImpl`
-Estas pruebas verifican la capa de controlador y su interacción con el servicio (`PostService`).
+#### Pruebas para `UserServiceImpl`
+Estas pruebas verifican la lógica de negocio y la interacción con el repositorio (`UserRepository`).
 
-1. **`shouldCreatePostEntity`**: Verifica que el controlador cree un post.
-2. **`shouldNotCreatePostEntity`**: Verifica que el controlador maneje errores al crear un post.
-3. **`shouldGetPostEntity`**: Verifica que el controlador obtenga un post por su ID.
-4. **`shouldNotGetPostEntity`**: Verifica que el controlador maneje errores al buscar un post.
-5. **`shouldUpdatePostEntity`**: Verifica que el controlador actualice un post correctamente.
-6. **`shouldDeletePostEntity`**: Verifica que el controlador elimine un post correctamente.
-7. **`shouldGetAllPostEntities`**: Verifica que el controlador obtenga todos los posts.
+1. **`UserService_getAllUsers`**: Verifica que se obtengan todos los usuarios almacenados.
+2. **`UserService_getUserById`**: Verifica que se obtenga un usuario por su ID.
+3. **`UserService_getUserById_ThrowsNotFound`**: Verifica que se lance una excepción si el usuario no existe.
+4. **`UserService_getUserByUsername`**: Verifica que se obtenga un usuario por su nombre de usuario.
+5. **`UserService_createUser`**: Verifica que un usuario válido se cree correctamente.
+6. **`UserService_updateUser`**: Verifica que un usuario existente se actualice correctamente.
+7. **`UserService_deleteUser`**: Verifica que un usuario existente se elimine correctamente.
+8. **`UserService_deleteUser_ThrowsNotFound`**: Verifica que se lance una excepción si el usuario a eliminar no existe.
 
-![image](https://github.com/user-attachments/assets/041b4b9a-fd06-4d14-890f-0239b6d90d84)
-![image](https://github.com/user-attachments/assets/976ab055-b286-467c-94de-0627bce32131)
+![image](https://github.com/user-attachments/assets/2fd237bc-a7c3-439d-86ec-50b74f56db61)
+![image](https://github.com/user-attachments/assets/ec0134d7-3d87-4131-bb37-ff2cde73a6cd)
+
+ Para probar desde consola las pruebas, utilzamos el siguiente comando:
+ 
+```bash
+  mvn test
+```
+
+![image](https://github.com/user-attachments/assets/bbcd86e0-f709-4af9-9c46-6010167cce9f)
 
 
 
