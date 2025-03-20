@@ -206,6 +206,39 @@ El proyecto está diseñado siguiendo un sistema de capas que organiza la lógic
 
 Puedes ver el video del taller funcionando en el siguiente enlace:
 
+## Pruebas Unitarias
+
+### PostTest
+
+Este archivo contiene pruebas unitarias para verificar el comportamiento de las capas de servicio (`PostServiceImpl`) y controlador (`PostControllerImpl`) de la aplicación. A continuación, se describen brevemente las pruebas realizadas:
+
+#### Pruebas para `PostServiceImpl`
+Estas pruebas verifican la lógica de negocio y la interacción con el repositorio (`PostRepository`).
+
+1. **`shouldcreatePost`**: Verifica que un post válido se cree correctamente.
+2. **`shouldNotCreatePost`**: Verifica que no se cree un post con contenido inválido.
+3. **`shouldGetPostById`**: Verifica que se obtenga un post por su ID.
+4. **`shouldNotGetPostById`**: Verifica que se lance una excepción si el post no existe.
+5. **`shouldUpdatePost`**: Verifica que un post existente se actualice correctamente.
+6. **`shouldDeletePost`**: Verifica que un post existente se elimine correctamente.
+7. **`shouldGetAllPosts`**: Verifica que se obtengan todos los posts almacenados.
+
+#### Pruebas para `PostControllerImpl`
+Estas pruebas verifican la capa de controlador y su interacción con el servicio (`PostService`).
+
+1. **`shouldCreatePostEntity`**: Verifica que el controlador cree un post.
+2. **`shouldNotCreatePostEntity`**: Verifica que el controlador maneje errores al crear un post.
+3. **`shouldGetPostEntity`**: Verifica que el controlador obtenga un post por su ID.
+4. **`shouldNotGetPostEntity`**: Verifica que el controlador maneje errores al buscar un post.
+5. **`shouldUpdatePostEntity`**: Verifica que el controlador actualice un post correctamente.
+6. **`shouldDeletePostEntity`**: Verifica que el controlador elimine un post correctamente.
+7. **`shouldGetAllPostEntities`**: Verifica que el controlador obtenga todos los posts.
+
+![image](https://github.com/user-attachments/assets/041b4b9a-fd06-4d14-890f-0239b6d90d84)
+![image](https://github.com/user-attachments/assets/976ab055-b286-467c-94de-0627bce32131)
+
+
+
 ## Autores
 
 **Milton Gutierrez, Samuel Rojas, Laura Gil** - Desarrolladores y autores del proyecto.
