@@ -1,82 +1,207 @@
-# taller7 serverless API
-The taller7 project, created with [`aws-serverless-java-container`](https://github.com/aws/serverless-java-container).
+# Taller de Microservicios
 
-The starter project defines a simple `/ping` resource that can accept `GET` requests with its tests.
+En este taller se diseñó y desarrolló una API junto con un monolito en Spring Boot que permite a los usuarios realizar publicaciones de hasta 140 caracteres, registrándolas en un flujo único de posts. La aplicación incluye entidades principales: Usuario y Post-Hilo (Stream).
 
-The project folder also includes a `template.yml` file. You can use this [SAM](https://github.com/awslabs/serverless-application-model) file to deploy the project to AWS Lambda and Amazon API Gateway or test in local with the [SAM CLI](https://github.com/awslabs/aws-sam-cli). 
+Además, se creó una aplicación en JavaScript para consumir el servicio, la cual fue desplegada en AWS S3, permitiendo su acceso público a través de internet. Tras verificar el correcto funcionamiento de la aplicación web, se implementó seguridad mediante JWT. Finalmente, el servicio fue desplegado en AWS Lambda, garantizando su disponibilidad y escalabilidad en la nube.
 
-## Pre-requisites
-* [AWS CLI](https://aws.amazon.com/cli/)
-* [SAM CLI](https://github.com/awslabs/aws-sam-cli)
-* [Gradle](https://gradle.org/) or [Maven](https://maven.apache.org/)
+---
 
-## Building the project
-You can use the SAM CLI to quickly build the project
-```bash
-$ mvn archetype:generate -DartifactId=taller7 -DarchetypeGroupId=com.amazonaws.serverless.archetypes -DarchetypeArtifactId=aws-serverless-jersey-archetype -DarchetypeVersion=2.0.1 -DgroupId=eci.arep -Dversion=1.0-SNAPSHOT -Dinteractive=false
-$ cd taller7
-$ sam build
-Building resource 'Taller7Function'
-Running JavaGradleWorkflow:GradleBuild
-Running JavaGradleWorkflow:CopyArtifacts
+## Tabla de Contenido
 
-Build Succeeded
+1. [Introducción](#introducción)
+2. [Instalación](#instalación)
+3. [Arquitectura del Proyecto](#arquitectura-del-proyecto)
+   - [Estructura del Directorio](#estructura-del-directorio)
+   - [Capas y Diseño del Proyecto](#capas-y-diseño-del-proyecto)
+4. [Reporte de Pruebas](#reporte-de-pruebas)
+5. [Diagrama del Proyecto](#diagrama-del-proyecto)
+6. [Video del AREP-Twitter](#video-del-arep-twitter)
+7. [Autores](#autores)
 
-Built Artifacts  : .aws-sam/build
-Built Template   : .aws-sam/build/template.yaml
+---
 
-Commands you can use next
-=========================
-[*] Invoke Function: sam local invoke
-[*] Deploy: sam deploy --guided
-```
+## Instalación
 
-## Testing locally with the SAM CLI
-
-From the project root folder - where the `template.yml` file is located - start the API with the SAM CLI.
+**1.** Clonar el repositorio
 
 ```bash
-$ sam local start-api
+  git clone https://github.com/MiltonGutierrez/AREP-TALLER-7.git
 
-...
-Mounting com.amazonaws.serverless.archetypes.StreamLambdaHandler::handleRequest (java11) at http://127.0.0.1:3000/{proxy+} [OPTIONS GET HEAD POST PUT DELETE PATCH]
-...
+  cd AREP-TALLER-7
 ```
 
-Using a new shell, you can send a test ping request to your API:
+**2.** Construir el proyecto mediante maven, donde debes tener previamente instalado este https://maven.apache.org . Luego pruebe el siguiente comando para compilar, empaquetar y ejecutar.
 
 ```bash
-$ curl -s http://127.0.0.1:3000/ping | python -m json.tool
-
-{
-    "pong": "Hello, World!"
-}
-``` 
-
-## Deploying to AWS
-To deploy the application in your AWS account, you can use the SAM CLI's guided deployment process and follow the instructions on the screen
-
-```
-$ sam deploy --guided
+  mvn clean install
+  mvn package
 ```
 
-Once the deployment is completed, the SAM CLI will print out the stack's outputs, including the new application URL. You can use `curl` or a web browser to make a call to the URL
-
-```
-...
--------------------------------------------------------------------------------------------------------------
-OutputKey-Description                        OutputValue
--------------------------------------------------------------------------------------------------------------
-Taller7Api - URL for application            https://xxxxxxxxxx.execute-api.us-west-2.amazonaws.com/Prod/pets
--------------------------------------------------------------------------------------------------------------
-```
-
-Copy the `OutputValue` into a browser or use curl to test your first request:
+**3.** Ejecuta el proyecto con el siguiente comando:
 
 ```bash
-$ curl -s https://xxxxxxx.execute-api.us-west-2.amazonaws.com/Prod/ping | python -m json.tool
+mvn spring-boot:run
 
-{
-    "pong": "Hello, World!"
-}
 ```
+
+**4.** Una vez este corriendo la aplicación prueba los siguiente:
+
+- **Página Principal:**
+
+```bash
+  http://localhost:8080/auth.html
+```
+
+## Arquitectura del Proyecto
+
+### **Estructura del directorio**
+
+El directorio del proyecto esta organizado de la siguiente manera:
+
+```plaintext
+src
+└── main
+    ├── java
+    │   └── edu.escuelaing.arep.arep_taller_7
+    │       ├── controller
+    │       │   ├── auth
+    │       │   │   ├── PostController
+    │       │   │   ├── PostControllerImpl
+    │       │   │   ├── UserController
+    │       │   │   ├── UserControllerImpl
+    │       │
+    │       ├── dto
+    │       │   ├── LoginDto
+    │       │   ├── PostDto
+    │       │   ├── TokenDto
+    │       │   ├── UserDto
+    │       │
+    │       ├── exception
+    │       │   ├── InvalidCredentialsException
+    │       │   ├── PostException
+    │       │   ├── TokenExpiredException
+    │       │   ├── UserException
+    │       │
+    │       ├── model
+    │       │   ├── PostEntity
+    │       │   ├── UserEntity
+    │       │
+    │       ├── repository
+    │       │   ├── PostRepository
+    │       │   ├── UserRepository
+    │       │
+    │       ├── security
+    │       │   ├── JwtConfig
+    │       │   ├── JwtRequestFilter
+    │       │   ├── JwtUserDetailsService
+    │       │   ├── JwtUtil
+    │       │   ├── SecurityConfiguration
+    │       │
+    │       ├── service
+    │       │   ├── PostService
+    │       │   ├── PostServiceImpl
+    │       │   ├── UserService
+    │       │   ├── UserServiceImpl
+    │       │
+    │       ├── ArepTaller7Application
+    │       ├── StreamLambdaHandler
+    │
+    ├── resources
+    │   ├── static
+    │   │   ├── css
+    │   │   │   ├── auth.css
+    │   │   │   ├── styles.css
+    │   │   ├── js
+    │   │   │   ├── aplicient.js
+    │   │   │   ├── auth.js
+    │   │   │   ├── twitter.js
+    │   │   ├── index.html
+    │   │   ├── twitter.html
+    │   │
+    │   ├── application.properties
+```
+
+### **Capas y diseño del Proyecto**
+
+El proyecto está diseñado siguiendo un sistema de capas que organiza la lógica y responsabilidades del sistema. Estas capas son las siguientes:
+
+#### 1. Capa de Presentación (Frontend)
+
+- **Descripción:** Esta capa se encarga de la interacción con el usuario final. Proporciona la interfaz gráfica para que los usuarios puedan interactuar con el sistema.
+- **Componentes:**
+  - Archivos HTML, CSS y JavaScript ubicados en `src/main/resources/static`.
+- **Responsabilidad:**
+  - Mostrar formularios de autenticación y creación de posts.
+  - Enviar solicitudes HTTP al backend usando `fetch`.
+  - Renderizar los datos obtenidos del backend en la interfaz gráfica.
+
+---
+
+#### 2. Capa de Controladores (Controller)
+
+- **Descripción:** Esta capa actúa como intermediaria entre la capa de presentación y la lógica de negocio. Expone los endpoints REST para que el frontend pueda interactuar con el backend.
+- **Componentes:**
+  - Controladores ubicados en `src/main/java/edu/escuelaing/arep/arep_taller_7/controller`.
+- **Responsabilidad:**
+  - Recibir solicitudes HTTP del frontend.
+  - Validar y procesar los datos de entrada.
+  - Delegar la lógica de negocio a los servicios correspondientes.
+  - Retornar respuestas HTTP al frontend.
+
+---
+
+#### 3. Capa de Servicios (Service)
+
+- **Descripción:** Contiene la lógica de negocio del sistema. Implementa las reglas y operaciones necesarias para cumplir con los requisitos funcionales.
+- **Componentes:**
+  - Servicios ubicados en `src/main/java/edu/escuelaing/arep/arep_taller_7/service`.
+- **Responsabilidad:**
+  - Implementar las reglas de negocio.
+  - Validar datos y aplicar restricciones.
+  - Interactuar con la capa de repositorios para acceder a la base de datos.
+
+---
+
+#### 4. Capa de Persistencia (Repository)
+
+- **Descripción:** Se encarga de la interacción con la base de datos. Utiliza JPA/Hibernate para realizar operaciones CRUD sobre las entidades.
+- **Componentes:**
+  - Repositorios ubicados en `src/main/java/edu/escuelaing/arep/arep_taller_7/repository`.
+- **Responsabilidad:**
+  - Realizar consultas y operaciones en la base de datos.
+  - Persistir y recuperar entidades como `UserEntity` y `PostEntity`.
+
+---
+
+#### 5. Capa de Seguridad (Security)
+
+- **Descripción:** Maneja la autenticación y autorización del sistema. Implementa seguridad mediante JWT.
+- **Componentes:**
+  - Clases ubicadas en `src/main/java/edu/escuelaing/arep/arep_taller_7/security`.
+- **Responsabilidad:**
+  - Proteger los endpoints mediante autenticación y autorización.
+  - Generar y validar tokens JWT.
+  - Configurar políticas de acceso y CORS.
+
+---
+
+#### 6. Capa de Entidades (Model)
+
+- **Descripción:** Define las entidades del sistema que representan las tablas de la base de datos.
+- **Componentes:**
+  - Clases ubicadas en `src/main/java/edu/escuelaing/arep/arep_taller_7/model`.
+- **Responsabilidad:**
+  - Mapear las tablas de la base de datos a objetos Java.
+  - Definir relaciones entre entidades.
+
+---
+
+### Diagrama del proyecto
+
+## Video del AREP-Twitter
+
+Puedes ver el video del taller funcionando en el siguiente enlace:
+
+## Autores
+
+**Milton Gutierrez, Samuel Rojas, Laura Gil** - Desarrolladores y autores del proyecto.
