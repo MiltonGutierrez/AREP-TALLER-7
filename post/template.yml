@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AWS Serverless Spring Boot 2 API - eci.arep::taller7
+Globals:
+  Api:
+    EndpointConfiguration: REGIONAL
+
+Resources:
+  Taller7Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: eci.arep.StreamLambdaHandler::handleRequest
+      Runtime: java17
+      CodeUri: .
+      MemorySize: 512
+      Policies: AWSLambdaBasicExecutionRole
+      Timeout: 30
+      Events:
+        ProxyResource:
+          Type: Api
+          Properties:
+            Path: /api/post/{proxy+}
+            Method: any
+
+Outputs:
+  Taller7Api:
+    Description: URL for application
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
+    Export:
+      Name: Taller7Api
