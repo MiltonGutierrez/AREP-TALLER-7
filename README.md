@@ -17,10 +17,10 @@ Además, se creó una aplicación en JavaScript para consumir el servicio, la cu
 3. [Arquitectura del Proyecto](#arquitectura-del-proyecto)
    - [Estructura del Directorio](#estructura-del-directorio)
    - [Capas y Diseño del Proyecto](#capas-y-diseño-del-proyecto)
-4. [Reporte de Pruebas](#reporte-de-pruebas)
-5. [Diagrama del Proyecto](#diagrama-del-proyecto)
-6. [Video del AREP-Twitter](#video-del-arep-twitter)
-7. [Autores](#autores)
+   - [Diagrama del Proyecto](#diagrama-del-proyecto)
+4. [Video AREP-Twitter](#video-arep-twitter)
+5. [Pruebas Unitarias](#pruebas-unitarias)
+6. [Autores](#autores)
 
 ---
 
