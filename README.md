@@ -26,6 +26,10 @@ Además, se creó una aplicación en JavaScript para consumir el servicio, la cu
 
 ## Instalación
 
+### Prerequisitos
+- Tener un contendenor de MySql par la conexión de base de datos.
+- Configurar las variables de entorno necesarias.
+
 **1.** Clonar el repositorio
 
 ```bash
@@ -204,7 +208,8 @@ El proyecto está diseñado siguiendo un sistema de capas que organiza la lógic
 
 ## Video del AREP-Twitter
 
-Puedes ver el video del taller funcionando en el siguiente enlace:
+https://github.com/user-attachments/assets/1f8c063c-1bd6-4073-8d59-5d2ea9dc63a2
+
 ## Pruebas Unitarias
 
 ### PostTest
